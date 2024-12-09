@@ -99,12 +99,11 @@ While this license permits unrestricted legal use, the original author wishes to
         }
 
         @media (orientation: portrait) {
-            /* Hide landscape row */
+            /* Previous digit button styles */
             .digit-row-landscape {
                 display: none;
             }
             
-            /* Show portrait grid */
             .digit-grid {
                 display: block;
             }
@@ -113,6 +112,43 @@ While this license permits unrestricted legal use, the original author wishes to
                 width: 63px;
                 height: 63px;
                 font-size: 24px;
+            }
+
+            /* Scale up UI elements */
+            h1 {
+                font-size: 31px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            #recipeButtons {
+                max-width: 100%;
+                gap: 5px;
+            }
+
+            .recipe-button {
+                padding: 10px 15px;
+                font-size: 22px;
+                margin: 0;
+            }
+
+            .stats {
+                font-size: 28px;
+            }
+
+            .phase {
+                font-size: 28px;
+            }
+
+            .congrats {
+                font-size: 28px;
+            }
+
+            button.mode, button.afk {
+                padding: 15px 31px;
+                font-size: 25px;
             }
         }
 
