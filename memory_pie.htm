@@ -27,6 +27,7 @@ While this license permits unrestricted legal use, the original author wishes to
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: monospace;
@@ -108,10 +109,11 @@ While this license permits unrestricted legal use, the original author wishes to
                 display: block;
             }
             
+
             .digit-button {
-                width: 63px;
-                height: 63px;
-                font-size: 24px;
+                width: calc(14vw - 4px);  /* viewport width based, minus small gap */
+                height: calc(14vw - 4px);
+                font-size: calc(5vw);
             }
 
             /* Scale up UI elements */
@@ -712,7 +714,7 @@ While this license permits unrestricted legal use, the original author wishes to
             if (isShowPhase || isAFKMode) {
                 const length = Math.min(isAFKMode ? getTargetLength() + AFK_EXTRA_DIGITS : getTargetLength(), currentSequence.length);
                 display.textContent = currentSequence.slice(0, length);
-                phase.textContent = isAFKMode ? "AFK Mode - Listening Practice" : "Study Phase - Watch and Listen";
+                phase.textContent = isAFKMode ? "AFK Mode - Listening Practice" : "Study Phase - Look and Listen";
             } else if (isRecallPhase) {
                 display.textContent = currentSequence.slice(0, currentCount);
                 phase.textContent = "Recall Phase - Type from memory";
