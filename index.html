@@ -63,16 +63,17 @@ While this license permits unrestricted legal use, the original author wishes to
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        /* Hide the portrait grid by default (landscape mode) */
+        .digit-grid {
+            display: none;
+        }
+
+        /* Show the landscape row by default */
         .digit-row-landscape {
-            margin: 10px 0;
             display: flex;
             justify-content: center;
             gap: 1px;
-        }
-
-        .digit-grid {
-            margin: 10px 0;
-            display: none;  /* Hidden by default */
+            margin: 1px 0;
         }
 
         .digit-row {
@@ -85,6 +86,7 @@ While this license permits unrestricted legal use, the original author wishes to
         .digit-button {
             padding: 8px 0;
             width: 36px;
+            margin: 0 1px;
             border: none;
             cursor: pointer;
             background: #003048;
@@ -97,23 +99,20 @@ While this license permits unrestricted legal use, the original author wishes to
         }
 
         @media (orientation: portrait) {
+            /* Hide landscape row */
             .digit-row-landscape {
-                display: none;  /* Hide landscape in portrait mode */
+                display: none;
             }
             
+            /* Show portrait grid */
             .digit-grid {
-                display: block;  /* Show grid in portrait mode */
+                display: block;
             }
             
             .digit-button {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
-            }
-            
-            .digit-row {
-                gap: 2px;
-                margin: 2px 0;
+                width: 63px;
+                height: 63px;
+                font-size: 24px;
             }
         }
 
@@ -180,6 +179,7 @@ While this license permits unrestricted legal use, the original author wishes to
     <div id="congrats" class="congrats"></div>
     <!-- Landscape layout (single row) -->
     <div id="digitButtonsLandscape" class="digit-row-landscape">
+        <button class="digit-button enter">↵</button>
         <button class="digit-button">.</button>
         <button class="digit-button">0</button>
         <button class="digit-button">1</button>
@@ -193,6 +193,7 @@ While this license permits unrestricted legal use, the original author wishes to
         <button class="digit-button">9</button>
         <button class="digit-button">0</button>
         <button class="digit-button">.</button>
+        <button class="digit-button enter">↵</button>
     </div>
 
     <!-- Portrait layout (grid) -->
@@ -959,9 +960,14 @@ While this license permits unrestricted legal use, the original author wishes to
         // Set up digit button click handlers
         document.querySelectorAll('.digit-button').forEach(button => {
             button.onclick = () => {
-                // Create and dispatch a keydown event with the button's text as the key
+                let keyToSend;
+                if (button.classList.contains('enter')) {
+                    keyToSend = 'Enter';
+                } else {
+                    keyToSend = button.textContent;
+                }
                 const event = new KeyboardEvent('keydown', {
-                    key: button.textContent,
+                    key: keyToSend,
                     bubbles: true
                 });
                 document.dispatchEvent(event);
