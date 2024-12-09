@@ -63,15 +63,58 @@ While this license permits unrestricted legal use, the original author wishes to
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
+        .digit-row-landscape {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+        }
+
+        .digit-grid {
+            margin: 10px 0;
+            display: none;  /* Hidden by default */
+        }
+
+        .digit-row {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+            margin: 1px 0;
+        }
+
         .digit-button {
             padding: 8px 0;
-            width: 36px;  /* Fixed width instead of padding for predictable sizing */
-            margin: 0 1px;
+            width: 36px;
             border: none;
             cursor: pointer;
             background: #003048;
             color: white;
             font-size: 16px;
+        }
+
+        .digit-button.enter {
+            background: #004868;
+        }
+
+        @media (orientation: portrait) {
+            .digit-row-landscape {
+                display: none;  /* Hide landscape in portrait mode */
+            }
+            
+            .digit-grid {
+                display: block;  /* Show grid in portrait mode */
+            }
+            
+            .digit-button {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            
+            .digit-row {
+                gap: 2px;
+                margin: 2px 0;
+            }
         }
 
         button {
@@ -135,7 +178,8 @@ While this license permits unrestricted legal use, the original author wishes to
     </div>
     <div class="phase" id="phase">Ready to start</div>
     <div id="congrats" class="congrats"></div>
-    <div id="digitButtons" style="margin: 10px 0; display: flex; gap: 0; justify-content: center;">
+    <!-- Landscape layout (single row) -->
+    <div id="digitButtonsLandscape" class="digit-row-landscape">
         <button class="digit-button">.</button>
         <button class="digit-button">0</button>
         <button class="digit-button">1</button>
@@ -149,6 +193,37 @@ While this license permits unrestricted legal use, the original author wishes to
         <button class="digit-button">9</button>
         <button class="digit-button">0</button>
         <button class="digit-button">.</button>
+    </div>
+
+    <!-- Portrait layout (grid) -->
+    <div id="digitButtonsPortrait" class="digit-grid">
+        <div class="digit-row">
+            <button class="digit-button enter">↵</button>
+            <button class="digit-button">.</button>
+            <button class="digit-button">0</button>
+            <button class="digit-button">1</button>
+            <button class="digit-button">2</button>
+            <button class="digit-button">3</button>
+            <button class="digit-button enter">↵</button>
+        </div>
+        <div class="digit-row">
+            <button class="digit-button enter">↵</button>
+            <button class="digit-button">3</button>
+            <button class="digit-button">4</button>
+            <button class="digit-button">5</button>
+            <button class="digit-button">6</button>
+            <button class="digit-button">7</button>
+            <button class="digit-button enter">↵</button>
+        </div>
+        <div class="digit-row">
+            <button class="digit-button enter">↵</button>
+            <button class="digit-button">7</button>
+            <button class="digit-button">8</button>
+            <button class="digit-button">9</button>
+            <button class="digit-button">0</button>
+            <button class="digit-button">.</button>
+            <button class="digit-button enter">↵</button>
+        </div>
     </div>
     <div class="digits" id="display" tabindex="0"></div>
 
