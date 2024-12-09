@@ -62,6 +62,18 @@ While this license permits unrestricted legal use, the original author wishes to
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
+        .digit-button {
+            padding: 8px 0;
+            width: 36px;  /* Fixed width instead of padding for predictable sizing */
+            margin: 0 1px;
+            border: none;
+            cursor: pointer;
+            background: #003048;
+            color: white;
+            font-size: 16px;
+        }
+
         button {
             padding: 10px 20px;
             margin: 0 10px;
@@ -109,6 +121,10 @@ While this license permits unrestricted legal use, the original author wishes to
         <button tabindex="7" class="recipe-button"></button>
     </div>
     <h2 id="title">π×e Trainer</h2>
+    <div class="controls">
+        <button onclick="resetProgress()" tabindex="1">Start New Run</button>
+        <button id="afkButton" onclick="toggleAFK()" class="afk" tabindex="2">Start AFK Mode</button>
+    </div>
     <div class="stats">
         <div>Cycle: <span id="runCount">0</span></div>
         <div>Previous Best: <span id="previousBest">0</span> characters</div>
@@ -119,9 +135,20 @@ While this license permits unrestricted legal use, the original author wishes to
     </div>
     <div class="phase" id="phase">Ready to start</div>
     <div id="congrats" class="congrats"></div>
-    <div class="controls">
-        <button onclick="resetProgress()" tabindex="1">Start New Run</button>
-        <button id="afkButton" onclick="toggleAFK()" class="afk" tabindex="2">Start AFK Mode</button>
+    <div id="digitButtons" style="margin: 10px 0; display: flex; gap: 0; justify-content: center;">
+        <button class="digit-button">.</button>
+        <button class="digit-button">0</button>
+        <button class="digit-button">1</button>
+        <button class="digit-button">2</button>
+        <button class="digit-button">3</button>
+        <button class="digit-button">4</button>
+        <button class="digit-button">5</button>
+        <button class="digit-button">6</button>
+        <button class="digit-button">7</button>
+        <button class="digit-button">8</button>
+        <button class="digit-button">9</button>
+        <button class="digit-button">0</button>
+        <button class="digit-button">.</button>
     </div>
     <div class="digits" id="display" tabindex="0"></div>
 
@@ -852,6 +879,18 @@ While this license permits unrestricted legal use, the original author wishes to
                 returnFocus();  // Add here after updateDisplay()
                 setTimeout(startRun, 1000);
             }
+        });
+
+        // Set up digit button click handlers
+        document.querySelectorAll('.digit-button').forEach(button => {
+            button.onclick = () => {
+                // Create and dispatch a keydown event with the button's text as the key
+                const event = new KeyboardEvent('keydown', {
+                    key: button.textContent,
+                    bubbles: true
+                });
+                document.dispatchEvent(event);
+            };
         });
 
         // Start first run automatically
